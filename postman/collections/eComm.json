@@ -1,507 +1,505 @@
 {
-	"info": {
-		"_postman_id": "e015873e-e35b-44eb-8b2a-67483abef687",
-		"name": "eComm",
-		"description": "E-Commerce API\n\nContact Support:\n Name: Ronak\n Email: admin@admin.com",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "24492028-e015873e-e35b-44eb-8b2a-67483abef687"
-	},
-	"item": [
-		{
-			"name": "Auth",
-			"item": [
-				{
-					"name": "Register a new user",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "0eecaaa4-6676-400c-a551-80b615c5a844",
-								"type": "text/javascript",
-								"packages": {},
-								"exec": [
-									"pm.test(\"Status code is 400\", function () {",
-									"    pm.response.to.have.status(400);",
-									"});"
-								]
-							}
-						}
-					],
-					"id": "1ed44fc1-b18c-486c-991b-c755e075e435",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/auth/register",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"auth",
-								"register"
-							]
-						},
-						"description": "Registers a user as admin or regular user"
-					},
-					"response": [
-						{
-							"id": "06dfbe7d-f1bc-445b-8dec-efa74fae6dd0",
-							"name": "User registered successfully",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"name\": \"any\",\n  \"password\": \"any\",\n  \"email\": \"any\"\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/auth/register",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"auth",
-										"register"
-									]
-								}
-							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "text",
-							"header": [],
-							"cookie": []
-						}
-					]
-				},
-				{
-					"name": "Login a user",
-					"id": "6b1e2b20-6687-42f6-84c7-8b2ba39c18cf",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"email\": \"any\",\n  \"password\": \"any\"\n}",
-							"options": {
-								"raw": {
-									"headerFamily": "json",
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/auth/login",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"auth",
-								"login"
-							]
-						},
-						"description": "Logs a user in, returns a cookie"
-					},
-					"response": [
-						{
-							"id": "cf68efb3-c9fb-49a6-8000-3a97ec670710",
-							"name": "User logged in successfully",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"email\": \"any\",\n  \"password\": \"any\"\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/auth/login",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"auth",
-										"login"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "text",
-							"header": [],
-							"cookie": []
-						}
-					]
-				},
-				{
-					"name": "Logout a user",
-					"id": "8c741015-b667-4973-858b-ca6603c3db88",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/auth/logout",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"auth",
-								"logout"
-							]
-						},
-						"description": "Ends a user's session by expiring the cookie"
-					},
-					"response": [
-						{
-							"id": "609508b1-3c67-460c-9838-c2b3267b7605",
-							"name": "Ends a user's session",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/auth/logout",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"auth",
-										"logout"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "text",
-							"header": [],
-							"cookie": []
-						}
-					]
-				}
-			],
-			"id": "8c2aade0-afab-4c05-abf6-f66d5295d93d"
-		},
-		{
-			"name": "User",
-			"item": [
-				{
-					"name": "Get All Users",
-					"id": "4b6c80e3-d321-404f-9878-38b72c5c6fae",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/users",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": [
-						{
-							"id": "61880885-3edf-4191-94d4-681778178b13",
-							"name": "Untitled Example",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/users",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users"
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "text",
-							"header": [],
-							"cookie": []
-						}
-					]
-				},
-				{
-					"name": "Show Current User",
-					"id": "3325ab56-2993-417c-8daf-ccb86fe10ed6",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/users/show-me",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"users",
-								"show-me"
-							]
-						}
-					},
-					"response": [
-						{
-							"id": "df4a5aaa-046a-4174-90a3-eb7d1e297bb4",
-							"name": "Untitled Example",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/users/show-me",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users",
-										"show-me"
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "text",
-							"header": [],
-							"cookie": []
-						}
-					]
-				},
-				{
-					"name": "Update User",
-					"id": "137ff0bc-fa7f-419d-8eed-4b28a85391a9",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/users/update-user",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"users",
-								"update-user"
-							]
-						}
-					},
-					"response": [
-						{
-							"id": "386ef10b-20d8-4b4c-af49-6f0bb36083e3",
-							"name": "OK",
-							"originalRequest": {
-								"method": "PATCH",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/users/update-user",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users",
-										"update-user"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "text",
-							"header": [],
-							"cookie": []
-						}
-					]
-				},
-				{
-					"name": "Update User Password",
-					"id": "732cdf55-ed60-438f-a2f2-4d9d040a94cd",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"oldPassword\": \"any\",\n  \"newPassword\": \"any\"\n}",
-							"options": {
-								"raw": {
-									"headerFamily": "json",
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/users/update-user-password",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"users",
-								"update-user-password"
-							]
-						}
-					},
-					"response": [
-						{
-							"id": "538c5068-6882-4e50-ba8b-51e4f892eaa7",
-							"name": "Untitled Example",
-							"originalRequest": {
-								"method": "PATCH",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"oldPassword\": \"any\",\n  \"newPassword\": \"any\"\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/users/update-user-password",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users",
-										"update-user-password"
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "text",
-							"header": [],
-							"cookie": []
-						}
-					]
-				},
-				{
-					"name": "Get Single User",
-					"id": "bcf5b9fc-32b4-46b5-b832-514065d7d534",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/users/:id",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"users",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "Lorem u",
-									"description": "(Required) "
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"id": "0d6d6eca-7ba2-457d-9917-43370bc6d43c",
-							"name": "Untitled Example",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/users/:id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id"
-										}
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "text",
-							"header": [],
-							"cookie": []
-						}
-					]
-				}
-			],
-			"id": "9535f402-ee80-49de-99a1-b5d55cf03896"
-		}
-	],
-	"variable": [
-		{
-			"id": "294e72f3-98c2-4b7c-b0bb-5e13ff63bf14",
-			"key": "baseUrl",
-			"value": "https://ecomm-k4ks.onrender.com/api/v1",
-			"type": "any"
-		}
-	]
+  "info": {
+    "_postman_id": "e015873e-e35b-44eb-8b2a-67483abef687",
+    "name": "eComm",
+    "description": "E-Commerce API\n\nContact Support:\n Name: Ronak\n Email: admin@admin.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register a new user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "id": "1ed44fc1-b18c-486c-991b-c755e075e435",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            },
+            "description": "Registers a user as admin or regular user"
+          },
+          "response": [
+            {
+              "id": "06dfbe7d-f1bc-445b-8dec-efa74fae6dd0",
+              "name": "User registered successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"any\",\n  \"password\": \"any\",\n  \"email\": \"any\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": []
+            }
+          ]
+        },
+        {
+          "name": "Login a user",
+          "id": "6b1e2b20-6687-42f6-84c7-8b2ba39c18cf",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"any\",\n  \"password\": \"any\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Logs a user in, returns a cookie"
+          },
+          "response": [
+            {
+              "id": "cf68efb3-c9fb-49a6-8000-3a97ec670710",
+              "name": "User logged in successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"any\",\n  \"password\": \"any\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": []
+            }
+          ]
+        },
+        {
+          "name": "Logout a user",
+          "id": "8c741015-b667-4973-858b-ca6603c3db88",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            },
+            "description": "Ends a user's session by expiring the cookie"
+          },
+          "response": [
+            {
+              "id": "609508b1-3c67-460c-9838-c2b3267b7605",
+              "name": "Ends a user's session",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/logout",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "logout"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": []
+            }
+          ]
+        }
+      ],
+      "id": "8c2aade0-afab-4c05-abf6-f66d5295d93d"
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get All Users",
+          "id": "4b6c80e3-d321-404f-9878-38b72c5c6fae",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "61880885-3edf-4191-94d4-681778178b13",
+              "name": "Untitled Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": []
+            }
+          ]
+        },
+        {
+          "name": "Show Current User",
+          "id": "3325ab56-2993-417c-8daf-ccb86fe10ed6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/show-me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "show-me"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "df4a5aaa-046a-4174-90a3-eb7d1e297bb4",
+              "name": "Untitled Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/users/show-me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "show-me"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": []
+            }
+          ]
+        },
+        {
+          "name": "Update User",
+          "id": "137ff0bc-fa7f-419d-8eed-4b28a85391a9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/update-user",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "update-user"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "386ef10b-20d8-4b4c-af49-6f0bb36083e3",
+              "name": "OK",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/users/update-user",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "update-user"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": []
+            }
+          ]
+        },
+        {
+          "name": "Update User Password",
+          "id": "732cdf55-ed60-438f-a2f2-4d9d040a94cd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oldPassword\": \"any\",\n  \"newPassword\": \"any\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/update-user-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "update-user-password"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "538c5068-6882-4e50-ba8b-51e4f892eaa7",
+              "name": "Untitled Example",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oldPassword\": \"any\",\n  \"newPassword\": \"any\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/update-user-password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "update-user-password"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": []
+            }
+          ]
+        },
+        {
+          "name": "Get Single User",
+          "id": "bcf5b9fc-32b4-46b5-b832-514065d7d534",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "id": "6d4b3fe4-949e-4658-b96d-97494590eabf",
+                  "key": "id",
+                  "value": "Lorem u",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0d6d6eca-7ba2-457d-9917-43370bc6d43c",
+              "name": "Untitled Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/users/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": []
+            }
+          ]
+        }
+      ],
+      "id": "9535f402-ee80-49de-99a1-b5d55cf03896"
+    }
+  ],
+  "variable": [
+    {
+      "id": "294e72f3-98c2-4b7c-b0bb-5e13ff63bf14",
+      "key": "baseUrl",
+      "value": "https://ecomm-k4ks.onrender.com/api/v1",
+      "type": "any"
+    }
+  ]
 }
