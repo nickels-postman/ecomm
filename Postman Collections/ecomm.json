@@ -601,6 +601,27 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Get base Copy Copy",
+      "id": "4b2f47e9-f727-4401-9c00-267dd27abc5c",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": []
     }
   ],
   "variable": [
