@@ -1,0 +1,16 @@
+{
+  "workspace": {
+    "id": ""
+  },
+  "entities": {
+    "collections": [
+      "../Postman Collections/ecomm.json"
+    ],
+    "environments": [],
+    "specs": [
+      "../schema/swagger_output.json"
+    ],
+    "flows": [],
+    "globals": []
+  }
+}
