@@ -1,0 +1,136 @@
+{
+  "info": {
+    "name": "E-Comm API",
+    "description": "# E-Commerce API\n\n## Overview\n\nThe E-Commerce API provides a comprehensive set of endpoints for managing user authentication and user operations in an e-commerce platform. This API supports both production and local development environments.\n\n**Version:** 0.0.7\n\n## Base URLs\n\n| Environment | Base URL |\n|------------|----------|\n| **Production** | `https://ecomm-k4ks.onrender.com/api/v1` |\n| **Local Development** | `http://localhost:5000/api/v1` |\n\n## Authorization Setup\n\nThis API uses **cookie-based authentication**. Follow these steps to configure authentication in Postman:\n\n### Step 1: Register or Login\n1. Use the **Register** endpoint (`POST /auth/register`) to create a new account, OR\n2. Use the **Login** endpoint (`POST /auth/login`) with existing credentials\n\n### Step 2: Automatic Cookie Handling\n- After successful login, the API returns an authentication cookie\n- Postman automatically captures and stores this cookie\n- The cookie will be automatically included in subsequent requests to the same domain\n\n### Step 3: Verify Authentication\n- Use the **Show Current User** endpoint (`GET /users/show-me`) to verify your authentication status\n- If authenticated, you'll receive your user information\n- If not authenticated, you'll receive an error response\n\n### Step 4: Logout\n- Use the **Logout** endpoint (`GET /auth/logout`) to end your session\n- This will expire the authentication cookie\n\n### Important Notes:\n- Cookies are domain-specific. Make sure you're using the same base URL for all requests in a session\n- The authentication cookie has an expiration time set by the server\n- For testing, you may need to login again if your session expires\n\n## Contact Information\n\n- **Name:** Ronak\n- **Email:** admin@admin.com\n- **URL:** https://ecomm-k4ks.onrender.com/api/v1\n\n## General Usage Guidelines\n\n1. **Content Type:** All POST and PATCH requests should use `Content-Type: application/json`\n2. **Authentication:** Most endpoints require authentication via cookie (obtained through login)\n3. **Response Format:** All responses are in JSON format\n4. **Error Handling:** The API returns appropriate HTTP status codes and error messages\n\n## API Categories\n\nThis collection is organized into two main categories:\n\n- **Auth:** User registration, login, and logout operations\n- **User:** User management and profile operations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "description": "## Authentication Endpoints\n\nThis folder contains all authentication-related endpoints for the E-Commerce API. These endpoints handle user registration, login, and logout operations.\n\n### Purpose\n\nThe Auth endpoints allow you to:\n- **Register** new users (both regular users and admins)\n- **Login** existing users and obtain authentication cookies\n- **Logout** users and expire their session cookies\n\n### Authentication Flow\n\n1. **Register** a new account using `/auth/register`\n2. **Login** with your credentials using `/auth/login` to receive an authentication cookie\n3. Use the cookie automatically in subsequent requests\n4. **Logout** when done using `/auth/logout` to end your session\n\n### Security Notes\n\n- Passwords should be strong and securely stored\n- The login endpoint returns a cookie that is automatically managed by Postman\n- Always logout when finished to ensure session security",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"securePassword123\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/register",
+            "description": "## Register a New User\n\nRegisters a new user account in the E-Commerce system. This endpoint allows you to create both regular user accounts and admin accounts.\n\n### Endpoint Details\n\n- **Method:** POST\n- **Path:** `/auth/register`\n- **Authentication:** Not required\n\n### Request Body\n\nThe request body must be in JSON format with the following fields:\n\n| Field | Type | Required | Description |\n|-------|------|----------|-------------|\n| `name` | string | Yes | Full name of the user |\n| `email` | string | Yes | Valid email address (must be unique) |\n| `password` | string | Yes | User's password (should be strong and secure) |\n\n### Example Request Body\n\n```json\n{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"securePassword123\"\n}\n```\n\n### Response\n\n**Status Code:** 201 Created\n\n**Description:** User registered successfully. The response will include the user details and an authentication cookie.\n\n### Special Notes\n\n- Email addresses must be unique in the system\n- Password requirements may be enforced by the server\n- Upon successful registration, you may be automatically logged in\n- The response may include an authentication cookie for immediate use"
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"securePassword123\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login",
+            "description": "## Login a User\n\nAuthenticates a user with their email and password. Upon successful authentication, the server returns an authentication cookie that will be automatically used for subsequent requests.\n\n### Endpoint Details\n\n- **Method:** POST\n- **Path:** `/auth/login`\n- **Authentication:** Not required\n\n### Request Body\n\nThe request body must be in JSON format with the following fields:\n\n| Field | Type | Required | Description |\n|-------|------|----------|-------------|\n| `email` | string | Yes | The user's registered email address |\n| `password` | string | Yes | The user's password |\n\n### Example Request Body\n\n```json\n{\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"securePassword123\"\n}\n```\n\n### Response\n\n**Status Code:** 200 OK\n\n**Description:** User logged in successfully. The response includes user details and sets an authentication cookie.\n\n### Cookie Information\n\n- The server returns an HTTP-only cookie containing the authentication token\n- Postman automatically captures and stores this cookie\n- The cookie will be included in all subsequent requests to the same domain\n- The cookie has an expiration time set by the server\n\n### Special Notes\n\n- Invalid credentials will result in an error response\n- Multiple failed login attempts may trigger security measures\n- The authentication cookie is required for accessing protected endpoints"
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/auth/logout",
+            "description": "## Logout a User\n\nEnds the current user's session by expiring the authentication cookie. After logout, the user will need to login again to access protected endpoints.\n\n### Endpoint Details\n\n- **Method:** GET\n- **Path:** `/auth/logout`\n- **Authentication:** Required (cookie-based)\n\n### Request Parameters\n\nNo parameters required.\n\n### Response\n\n**Status Code:** 200 OK\n\n**Description:** User session ended successfully. The authentication cookie is expired.\n\n### What Happens During Logout\n\n1. The server invalidates the current session\n2. The authentication cookie is expired\n3. Subsequent requests will require re-authentication\n\n### Special Notes\n\n- You must be logged in to logout (requires valid authentication cookie)\n- After logout, you'll need to login again to access protected endpoints\n- This is a GET request (not POST) for simplicity\n- The logout process is immediate and cannot be undone"
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "description": "## User Management Endpoints\n\nThis folder contains all user-related endpoints for managing user accounts and profiles in the E-Commerce API.\n\n### Purpose\n\nThe User endpoints allow you to:\n- **View** all users in the system (admin functionality)\n- **Retrieve** the current authenticated user's profile\n- **Update** user profile information\n- **Change** user passwords\n- **Get** details of a specific user by ID\n\n### Authentication Required\n\n⚠️ **All endpoints in this folder require authentication.** You must be logged in (have a valid authentication cookie) to access these endpoints.\n\n### Common Use Cases\n\n1. **Profile Management:** Users can view and update their own profile information\n2. **Password Management:** Users can securely change their passwords\n3. **User Lookup:** Retrieve information about specific users\n4. **Admin Operations:** View all users in the system (may require admin privileges)\n\n### Security Notes\n\n- Users can only update their own profile information\n- Password changes require the old password for verification\n- Some endpoints may require admin privileges\n- All operations are logged for security purposes",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/users",
+            "description": "## Get All Users\n\nRetrieves a list of all users registered in the E-Commerce system. This endpoint is typically used for administrative purposes.\n\n### Endpoint Details\n\n- **Method:** GET\n- **Path:** `/users`\n- **Authentication:** Required (cookie-based)\n\n### Request Parameters\n\nNo parameters required.\n\n### Response\n\n**Status Code:** 200 OK\n\n**Description:** Returns an array of user objects containing user information.\n\n### Expected Response Format\n\n```json\n{\n  \"users\": [\n    {\n      \"id\": \"user_id_1\",\n      \"name\": \"John Doe\",\n      \"email\": \"john.doe@example.com\",\n      \"role\": \"user\"\n    },\n    {\n      \"id\": \"user_id_2\",\n      \"name\": \"Jane Smith\",\n      \"email\": \"jane.smith@example.com\",\n      \"role\": \"admin\"\n    }\n  ]\n}\n```\n\n### Special Notes\n\n- This endpoint may require admin privileges\n- Sensitive information (like passwords) is never included in the response\n- The response may be paginated for large user bases\n- You must be authenticated to access this endpoint"
+          }
+        },
+        {
+          "name": "Show Current User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/users/show-me",
+            "description": "## Show Current User\n\nRetrieves the profile information of the currently authenticated user. This endpoint is useful for displaying user profile data or verifying authentication status.\n\n### Endpoint Details\n\n- **Method:** GET\n- **Path:** `/users/show-me`\n- **Authentication:** Required (cookie-based)\n\n### Request Parameters\n\nNo parameters required. The user is identified by the authentication cookie.\n\n### Response\n\n**Status Code:** 200 OK\n\n**Description:** Returns the current user's profile information.\n\n### Expected Response Format\n\n```json\n{\n  \"user\": {\n    \"id\": \"user_id\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"role\": \"user\",\n    \"createdAt\": \"2024-01-01T00:00:00.000Z\"\n  }\n}\n```\n\n### Special Notes\n\n- This endpoint is perfect for verifying that authentication is working correctly\n- The response includes the user's current profile information\n- Passwords are never included in the response\n- If not authenticated, you'll receive an error response\n- This is often used to populate user profile pages in applications"
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Updated\",\n  \"email\": \"john.updated@example.com\"\n}"
+            },
+            "url": "{{baseUrl}}/users/update-user",
+            "description": "## Update User Profile\n\nUpdates the profile information of the currently authenticated user. This endpoint allows users to modify their account details such as name and email.\n\n### Endpoint Details\n\n- **Method:** PATCH\n- **Path:** `/users/update-user`\n- **Authentication:** Required (cookie-based)\n\n### Request Body\n\nThe request body should be in JSON format. Include only the fields you want to update:\n\n| Field | Type | Required | Description |\n|-------|------|----------|-------------|\n| `name` | string | No | Updated full name of the user |\n| `email` | string | No | Updated email address (must be unique) |\n\n### Example Request Body\n\n```json\n{\n  \"name\": \"John Updated\",\n  \"email\": \"john.updated@example.com\"\n}\n```\n\n### Response\n\n**Status Code:** 200 OK\n\n**Description:** User profile updated successfully. Returns the updated user information.\n\n### Special Notes\n\n- You can only update your own profile (identified by authentication cookie)\n- Email addresses must be unique in the system\n- If updating email, you may need to verify the new email address\n- Password cannot be updated through this endpoint (use Update User Password instead)\n- Partial updates are supported - include only the fields you want to change"
+          }
+        },
+        {
+          "name": "Update User Password",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oldPassword\": \"currentPassword123\",\n  \"newPassword\": \"newSecurePassword456\"\n}"
+            },
+            "url": "{{baseUrl}}/users/update-user-password",
+            "description": "## Update User Password\n\nAllows the currently authenticated user to change their password. This endpoint requires the user to provide their current password for security verification.\n\n### Endpoint Details\n\n- **Method:** PATCH\n- **Path:** `/users/update-user-password`\n- **Authentication:** Required (cookie-based)\n\n### Request Body\n\nThe request body must be in JSON format with the following fields:\n\n| Field | Type | Required | Description |\n|-------|------|----------|-------------|\n| `oldPassword` | string | Yes | The user's current password (for verification) |\n| `newPassword` | string | Yes | The new password to set (should be strong and secure) |\n\n### Example Request Body\n\n```json\n{\n  \"oldPassword\": \"currentPassword123\",\n  \"newPassword\": \"newSecurePassword456\"\n}\n```\n\n### Response\n\n**Status Code:** 200 OK\n\n**Description:** Password updated successfully.\n\n### Security Requirements\n\n- The `oldPassword` must match the user's current password\n- The `newPassword` should meet security requirements (length, complexity, etc.)\n- After password change, existing sessions may be invalidated\n- You may need to login again after changing your password\n\n### Special Notes\n\n- You can only change your own password\n- If the old password is incorrect, the request will fail\n- Choose a strong new password with a mix of characters\n- Consider logging out and logging back in after password change\n- Password requirements may be enforced by the server"
+          }
+        },
+        {
+          "name": "Get Single User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/users/:id",
+            "description": "## Get Single User\n\nRetrieves detailed information about a specific user by their unique user ID.\n\n### Endpoint Details\n\n- **Method:** GET\n- **Path:** `/users/{id}`\n- **Authentication:** Required (cookie-based)\n\n### Path Parameters\n\n| Parameter | Type | Required | Description |\n|-----------|------|----------|-------------|\n| `id` | string | Yes | The unique identifier of the user to retrieve |\n\n### Example Request\n\n```\nGET {{baseUrl}}/users/507f1f77bcf86cd799439011\n```\n\n### Response\n\n**Status Code:** 200 OK\n\n**Description:** Returns the user object with detailed information.\n\n### Expected Response Format\n\n```json\n{\n  \"user\": {\n    \"id\": \"507f1f77bcf86cd799439011\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"role\": \"user\",\n    \"createdAt\": \"2024-01-01T00:00:00.000Z\"\n  }\n}\n```\n\n### Special Notes\n\n- The user ID must be valid and exist in the system\n- Sensitive information (like passwords) is never included in the response\n- You may need appropriate permissions to view other users' information\n- If the user ID doesn't exist, you'll receive a 404 Not Found error\n- This endpoint is useful for user profile pages or admin dashboards"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://ecomm-k4ks.onrender.com/api/v1",
+      "type": "string"
+    }
+  ]
+}
